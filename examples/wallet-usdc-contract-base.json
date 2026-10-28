@@ -1,0 +1,32 @@
+{
+  "capability": "wallet.summary",
+  "request": {
+    "chain": "base",
+    "address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+  },
+  "response": {
+    "ts": "2026-10-28T12:24:03.050Z",
+    "chain": "base",
+    "address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "type": "contract_or_smart_wallet",
+    "tx_count_sent": 1,
+    "balances": {
+      "eth": 0.009801,
+      "usdc": 0
+    },
+    "value_usd_est": 22.97,
+    "eth_price_usd": 2344.21,
+    "reputation": {
+      "flagged": false,
+      "flags": [],
+      "data_source": null
+    },
+    "activity_level": "light",
+    "sources": [
+      "Base/Ethereum public RPC",
+      "gopluslabs.io",
+      "coingecko.com"
+    ],
+    "note": "Native ETH + USDC only. Not financial advice."
+  }
+}

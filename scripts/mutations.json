@@ -1,0 +1,12 @@
+[
+  {"id": "M1 honeypot weight zero", "file": "src/core.js", "from": "add(t.is_honeypot === \"1\", 60, \"honeypot\")", "to": "add(t.is_honeypot === \"1\", 0, \"honeypot\")"},
+  {"id": "M2 high threshold moved", "file": "src/core.js", "from": "score >= 50 ? \"high\"", "to": "score >= 101 ? \"high\""},
+  {"id": "M3 score not capped", "file": "src/core.js", "from": "score = Math.min(100, score);", "to": ""},
+  {"id": "M4 USDC decimals", "file": "src/core.js", "from": "/ 1e6, px", "to": "/ 1e18, px"},
+  {"id": "M5 top holders not 5", "file": "src/core.js", "from": "(t?.holders || []).slice(0, 5)", "to": "(t?.holders || []).slice(0, 4)"},
+  {"id": "M6 regime breadth", "file": "src/core.js", "from": "(m > 0 && br > 0.5) ? \"risk_on\"", "to": "(m > 0 && br > 0.9) ? \"risk_on\""},
+  {"id": "M7 trending count", "file": "src/core.js", "from": "(tr?.coins || []).slice(0, 7)", "to": "(tr?.coins || []).slice(0, 6)"},
+  {"id": "M8 stables not excluded", "file": "src/core.js", "from": "const coins = mk.filter(c => !STABLES.has(c.id));", "to": "const coins = mk;"},
+  {"id": "M9 risk route unpaid", "file": "src/index.js", "from": "\"/v2/token-risk\": { price: c.env.PRICE_RISK", "to": "\"/v2/token-riskx\": { price: c.env.PRICE_RISK"},
+  {"id": "M10 not open source unflagged", "file": "src/core.js", "from": "add(t.is_open_source === \"0\", 15, \"not_open_source\")", "to": "add(false, 15, \"not_open_source\")"}
+]

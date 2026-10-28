@@ -1,0 +1,193 @@
+{
+  "capability": "market.agent_brief",
+  "request": {},
+  "response": {
+    "ts": "2026-10-28T12:24:03.240Z",
+    "schema": "astra.agent_brief.v1",
+    "regime": "neutral",
+    "scores": {
+      "fear_greed": 51,
+      "breadth_up_ratio": 0.723,
+      "mcap_chg24h_pct": -1.3,
+      "btc_dominance": 59.46
+    },
+    "signals": [
+      {
+        "type": "rotation",
+        "text": "High BTC dominance: alts lagging"
+      }
+    ],
+    "majors": [
+      {
+        "id": "bitcoin",
+        "symbol": "btc",
+        "price": 80901,
+        "chg24h": 1.14803,
+        "chg7d": -2.4877,
+        "mcap": 1626084071705
+      },
+      {
+        "id": "ethereum",
+        "symbol": "eth",
+        "price": 2344.93,
+        "chg24h": 1.12367,
+        "chg7d": -3.8973,
+        "mcap": 286379118946
+      },
+      {
+        "id": "binancecoin",
+        "symbol": "bnb",
+        "price": 756.34,
+        "chg24h": 2.18815,
+        "chg7d": 1.8731,
+        "mcap": 99452237023
+      },
+      {
+        "id": "ripple",
+        "symbol": "xrp",
+        "price": 1.32,
+        "chg24h": 0.78774,
+        "chg7d": -2.4221,
+        "mcap": 83362224788
+      },
+      {
+        "id": "solana",
+        "symbol": "sol",
+        "price": 101.95,
+        "chg24h": 1.6709,
+        "chg7d": -3.6564,
+        "mcap": 60131170163
+      }
+    ],
+    "movers": {
+      "gainers": [
+        {
+          "id": "bitway",
+          "symbol": "btw",
+          "price": 1.74,
+          "chg24h": 19.79406,
+          "chg7d": -2.4864,
+          "mcap": 2621898163
+        },
+        {
+          "id": "pepe",
+          "symbol": "pepe",
+          "price": 0.00000494,
+          "chg24h": 14.84102,
+          "chg7d": 9.0474,
+          "mcap": 2076934896
+        },
+        {
+          "id": "memecore",
+          "symbol": "m",
+          "price": 1.094,
+          "chg24h": 6.55087,
+          "chg7d": 43.9913,
+          "mcap": 2507714019
+        },
+        {
+          "id": "bitcoin-cash",
+          "symbol": "bch",
+          "price": 296.66,
+          "chg24h": 5.33126,
+          "chg7d": 3.6484,
+          "mcap": 5963118241
+        },
+        {
+          "id": "leo-token",
+          "symbol": "leo",
+          "price": 9.4,
+          "chg24h": 4.53441,
+          "chg7d": 3.9985,
+          "mcap": 8645863181
+        }
+      ],
+      "losers": [
+        {
+          "id": "venice-token",
+          "symbol": "vvv",
+          "price": 24.38,
+          "chg24h": -4.66083,
+          "chg7d": -5.3152,
+          "mcap": 1185755120
+        },
+        {
+          "id": "xdce-crowd-sale",
+          "symbol": "xdc",
+          "price": 0.03353504,
+          "chg24h": -4.0269,
+          "chg7d": -1.3658,
+          "mcap": 668916107
+        },
+        {
+          "id": "dash",
+          "symbol": "dash",
+          "price": 53.44,
+          "chg24h": -3.14238,
+          "chg7d": 5.0733,
+          "mcap": 688349905
+        },
+        {
+          "id": "quant-network",
+          "symbol": "qnt",
+          "price": 197.16,
+          "chg24h": -2.64216,
+          "chg7d": 0.4676,
+          "mcap": 2865691330
+        },
+        {
+          "id": "rain",
+          "symbol": "rain",
+          "price": 0.00696719,
+          "chg24h": -1.71064,
+          "chg7d": -23.9862,
+          "mcap": 4951033362
+        }
+      ]
+    },
+    "trending": [
+      {
+        "id": "stonk-3",
+        "symbol": "STONK",
+        "mcap_rank": 245
+      },
+      {
+        "id": "initia",
+        "symbol": "INIT",
+        "mcap_rank": 501
+      },
+      {
+        "id": "pepe",
+        "symbol": "PEPE",
+        "mcap_rank": 48
+      },
+      {
+        "id": "pearl-2",
+        "symbol": "PEARL",
+        "mcap_rank": 95
+      },
+      {
+        "id": "pudgy-penguins",
+        "symbol": "PENGU",
+        "mcap_rank": 112
+      },
+      {
+        "id": "pons",
+        "symbol": "PONS",
+        "mcap_rank": 182
+      },
+      {
+        "id": "zcash",
+        "symbol": "ZEC",
+        "mcap_rank": 10
+      }
+    ],
+    "summary": "Regime neutral. Total mcap 2.73T (-1.30% 24h); F&G 51; 68/94 of top-100 up; BTC dom 59.5%.",
+    "sources": [
+      "coingecko.com",
+      "alternative.me",
+      "coingecko.com/trending"
+    ],
+    "note": "Machine-readable market context for agents. Not financial advice."
+  }
+}

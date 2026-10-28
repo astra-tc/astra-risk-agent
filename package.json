@@ -1,0 +1,17 @@
+{
+  "name": "astra-risk-agent",
+  "version": "1.0.0",
+  "description": "Paid agent on LAX: token risk check, wallet summary and agent market brief over x402 (USDC on Base)",
+  "type": "module",
+  "license": "MIT",
+  "author": "Astra Trading Co",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "record": "node scripts/record.mjs",
+    "mutation": "node scripts/mutation-check.mjs",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": { "hono": "^4.6.0", "x402-hono": "^0.6.0" },
+  "devDependencies": { "ajv": "^8.17.1", "wrangler": "^3.90.0" }
+}

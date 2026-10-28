@@ -1,0 +1,81 @@
+{
+  "capability": "token.risk",
+  "request": {
+    "chain": "base",
+    "address": "0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed"
+  },
+  "response": {
+    "ts": "2026-10-28T12:24:02.160Z",
+    "chain": "base",
+    "address": "0x4ed4E862860beD51a9570b96d89aF5E1B0Efefed",
+    "name": "Degen",
+    "symbol": "DEGEN",
+    "risk_score": 10,
+    "risk_level": "low",
+    "data_complete": true,
+    "flags": [
+      "mintable"
+    ],
+    "contract": {
+      "open_source": true,
+      "proxy": false,
+      "mintable": true,
+      "honeypot": false,
+      "buy_tax": 0,
+      "sell_tax": 0,
+      "owner": "0x704ec5c12ca20a293c2c0b72b22619a4231f3c0d",
+      "holders": 1182618,
+      "total_supply": "35941835512.251380192866972199"
+    },
+    "top_holders": [
+      {
+        "address": "0x06a19654e0872ba71c2261ea691ecf8a0c677156",
+        "pct": 23.73,
+        "is_contract": true,
+        "locked": false,
+        "tag": null
+      },
+      {
+        "address": "0x82d4cd9bf16017fd518511d8bbe6d0493af31a10",
+        "pct": 5.64,
+        "is_contract": false,
+        "locked": false,
+        "tag": null
+      },
+      {
+        "address": "0xefef4558802bf373ce3307189c79a9cab0a4cb9c",
+        "pct": 5.36,
+        "is_contract": true,
+        "locked": false,
+        "tag": null
+      },
+      {
+        "address": "0x9773c9e7d048ae91a4fd9a48cd0b984e31fa418c",
+        "pct": 5.31,
+        "is_contract": false,
+        "locked": false,
+        "tag": null
+      },
+      {
+        "address": "0x7d00d30269fc62ab5fab54418feedbdc71fdb25f",
+        "pct": 5.14,
+        "is_contract": true,
+        "locked": false,
+        "tag": null
+      }
+    ],
+    "market": {
+      "pairs": 30,
+      "liquidity_usd": 534978,
+      "volume_24h_usd": 27166,
+      "price_usd": 0.0009197,
+      "oldest_pair_age_days": 1024.7,
+      "top_pair": "https://dexscreener.com/base/0xc9034c3e7f58003e6ae0c8438e7c8f4598d5acaa"
+    },
+    "sources": [
+      "gopluslabs.io",
+      "dexscreener.com"
+    ],
+    "note": "Heuristic score 0-100 (higher = riskier). Not financial advice; not an audit."
+  }
+}

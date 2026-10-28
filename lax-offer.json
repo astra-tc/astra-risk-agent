@@ -1,0 +1,642 @@
+{
+  "lax_version": "1.0",
+  "name": "Astra onchain risk agent",
+  "description": "Paid checks for AI agents before they touch a token or a wallet on Base or Ethereum: a token risk check (honeypot, taxes, owner powers, top holders, liquidity, 0 to 100 score), a wallet summary (ETH and USDC balances, activity, EOA or contract, reputation flags) and a machine readable market brief. USDC per call over x402 on Base. Heuristics from public data, not an audit and not financial advice.",
+  "category": "data",
+  "endpoint": "https://astra-x402-data.astratc.workers.dev/",
+  "agent_did": "did:web:astra-x402-data.astratc.workers.dev",
+  "capabilities": [
+    {
+      "skill_id": "token.risk",
+      "description": "GET https://astra-x402-data.astratc.workers.dev/v2/token-risk?chain=base&address=0x... Token risk check with a 0 to 100 score (higher is riskier) and the flags behind it.",
+      "pricing": {
+        "model": "per_call",
+        "amount": "1.00",
+        "currency": "USDC",
+        "rail": "x402"
+      },
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "chain": {
+            "type": "string",
+            "enum": [
+              "base",
+              "ethereum"
+            ],
+            "default": "base"
+          },
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "ts",
+          "chain",
+          "address",
+          "risk_score",
+          "risk_level",
+          "data_complete",
+          "flags",
+          "contract",
+          "top_holders",
+          "market",
+          "sources",
+          "note"
+        ],
+        "properties": {
+          "ts": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "chain": {
+            "type": "string",
+            "enum": [
+              "base",
+              "ethereum"
+            ]
+          },
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "symbol": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "risk_score": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 100
+          },
+          "risk_level": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "unknown"
+            ]
+          },
+          "data_complete": {
+            "type": "boolean"
+          },
+          "flags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "contract": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "open_source": {
+                "type": "boolean"
+              },
+              "proxy": {
+                "type": "boolean"
+              },
+              "mintable": {
+                "type": "boolean"
+              },
+              "honeypot": {
+                "type": "boolean"
+              },
+              "buy_tax": {
+                "type": "number"
+              },
+              "sell_tax": {
+                "type": "number"
+              },
+              "owner": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "holders": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "total_supply": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "top_holders": {
+            "type": "array",
+            "maxItems": 5,
+            "items": {
+              "type": "object",
+              "required": [
+                "address",
+                "pct"
+              ],
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "pct": {
+                  "type": "number"
+                },
+                "is_contract": {
+                  "type": "boolean"
+                },
+                "locked": {
+                  "type": "boolean"
+                },
+                "tag": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          },
+          "market": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "pairs": {
+                "type": "integer"
+              },
+              "liquidity_usd": {
+                "type": "number"
+              },
+              "volume_24h_usd": {
+                "type": "number"
+              },
+              "price_usd": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "oldest_pair_age_days": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "top_pair": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "skill_id": "wallet.summary",
+      "description": "GET https://astra-x402-data.astratc.workers.dev/v2/wallet?chain=base&address=0x... Wallet summary: ETH and USDC balances, sent transaction count, EOA or contract, reputation flags.",
+      "pricing": {
+        "model": "per_call",
+        "amount": "0.50",
+        "currency": "USDC",
+        "rail": "x402"
+      },
+      "input_schema": {
+        "type": "object",
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "chain": {
+            "type": "string",
+            "enum": [
+              "base",
+              "ethereum"
+            ],
+            "default": "base"
+          },
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "ts",
+          "chain",
+          "address",
+          "type",
+          "tx_count_sent",
+          "balances",
+          "value_usd_est",
+          "reputation",
+          "activity_level"
+        ],
+        "properties": {
+          "ts": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "chain": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "eoa",
+              "contract_or_smart_wallet"
+            ]
+          },
+          "tx_count_sent": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "balances": {
+            "type": "object",
+            "required": [
+              "eth",
+              "usdc"
+            ],
+            "properties": {
+              "eth": {
+                "type": "number"
+              },
+              "usdc": {
+                "type": "number"
+              }
+            }
+          },
+          "value_usd_est": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "eth_price_usd": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "reputation": {
+            "type": "object",
+            "required": [
+              "flagged",
+              "flags"
+            ],
+            "properties": {
+              "flagged": {
+                "type": "boolean"
+              },
+              "flags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "data_source": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "activity_level": {
+            "type": "string",
+            "enum": [
+              "none",
+              "light",
+              "active",
+              "heavy"
+            ]
+          },
+          "sources": {
+            "type": "array"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "skill_id": "market.agent_brief",
+      "description": "GET https://astra-x402-data.astratc.workers.dev/v2/agent-brief Machine readable crypto market brief: regime, scores, signals, majors, movers, trending and a one line summary.",
+      "pricing": {
+        "model": "per_call",
+        "amount": "1.00",
+        "currency": "USDC",
+        "rail": "x402"
+      },
+      "input_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object",
+        "required": [
+          "ts",
+          "schema",
+          "regime",
+          "scores",
+          "signals",
+          "majors",
+          "movers",
+          "trending",
+          "summary"
+        ],
+        "properties": {
+          "ts": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "schema": {
+            "const": "astra.agent_brief.v1"
+          },
+          "regime": {
+            "type": "string",
+            "enum": [
+              "risk_on_strong",
+              "risk_on",
+              "neutral",
+              "risk_off",
+              "risk_off_strong"
+            ]
+          },
+          "scores": {
+            "type": "object",
+            "required": [
+              "fear_greed",
+              "breadth_up_ratio",
+              "mcap_chg24h_pct",
+              "btc_dominance"
+            ],
+            "properties": {
+              "fear_greed": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "breadth_up_ratio": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "mcap_chg24h_pct": {
+                "type": "number"
+              },
+              "btc_dominance": {
+                "type": "number"
+              }
+            }
+          },
+          "signals": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "type",
+                "text"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "majors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "symbol",
+                "price"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "symbol": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "chg24h": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "chg7d": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "mcap": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              }
+            }
+          },
+          "movers": {
+            "type": "object",
+            "required": [
+              "gainers",
+              "losers"
+            ],
+            "properties": {
+              "gainers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "symbol",
+                    "price"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "chg24h": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "chg7d": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "mcap": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              },
+              "losers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "symbol",
+                    "price"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "symbol": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "chg24h": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "chg7d": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "mcap": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "trending": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "symbol"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "symbol": {
+                  "type": "string"
+                },
+                "mcap_rank": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                }
+              }
+            }
+          },
+          "summary": {
+            "type": "string"
+          },
+          "sources": {
+            "type": "array"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "constitutional_constraints": [
+    "Solidarity Oath",
+    "Renewal Mandate",
+    "Treasury Equilibrium",
+    "Harm Shield",
+    "Transparency Covenant"
+  ],
+  "payment_rails": [
+    "x402",
+    "usdc-base"
+  ]
+}

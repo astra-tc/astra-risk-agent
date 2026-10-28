@@ -1,0 +1,27 @@
+name = "astra-x402-data"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+PAY_TO = "0x1A7Dc2677391D49FB3001AD5a1aa89A573c9b865"   # Astra Base wallet (receive only)
+NETWORK = "base"
+FACILITATOR_URL = "https://facilitator.payai.network"   # x402.org supports only base-sepolia; PayAI is free, no account, Base mainnet v1
+PRICE_SNAPSHOT = "$0.05"
+PRICE_COIN = "$0.01"
+PRICE_BRIEF = "$0.25"
+PRICE_RISK = "$1.00"
+PRICE_WALLET = "$0.50"
+PRICE_AGENT_BRIEF = "$1.00"
+PRICE_SUMMARIZE = "$0.10"
+PRICE_TRANSLATE = "$0.10"
+
+# Optional cache (create with: npx wrangler kv namespace create CACHE, then paste the id)
+# [[kv_namespaces]]
+# binding = "CACHE"
+# id = "<id>"
+[assets]
+directory = "./public"
+
+[ai]
+binding = "AI"
